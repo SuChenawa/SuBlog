@@ -73,85 +73,10 @@ hosts:
   #     - 240.0.0.0/4
 
 proxies:
-# 支持的协议及加密算法示例请查阅 Clash 项目 README 以使用最新格式：https://github.com/Dreamacro/clash/blob/master/README.md
 
-# Shadowsocks 支持的加密方式:
-#   aes-128-gcm aes-192-gcm aes-256-gcm
-#   aes-128-cfb aes-192-cfb aes-256-cfb
-#   aes-128-ctr aes-192-ctr aes-256-ctr
-#   rc4-md5 chacha20-ietf xchacha20
-#   chacha20-ietf-poly1305 xchacha20-ietf-poly1305
 
-# Shadowsocks
-- name: "ss"
-  type: ss
-  server: server
-  port: 443
-  cipher: chacha20-ietf-poly1305
-  password: "password"
-  # udp: true
-
-# Shadowsocks(simple-obfs)
-- name: "ss-obfs"
-  type: ss
-  server: server
-  port: 443
-  cipher: chacha20-ietf-poly1305
-  password: "password"
-  plugin: obfs
-  plugin-opts:
-      mode: tls
-      host: example.com
-
-# Shadowsocks(v2ray-plugin)
-- name: "ss-v2ray"
-  type: ss
-  server: server
-  port: 443
-  cipher: chacha20-ietf-poly1305
-  password: "password"
-  plugin: v2ray-plugin
-  plugin-opts:
-    mode: websocket # no QUIC now
-    # tls: true # wss
-    # skip-cert-verify: true
-    # host: bing.com
-    # path: "/"
-    # mux: true
-    # headers:
-    #   custom: value
-
-# VMess
-- name: "v2ray"
-  type: vmess
-  server: server
-  port: 443
-  uuid: a3482e88-686a-4a58-8126-99c9df64b7bf
-  alterId: 64
-  cipher: auto
-  # udp: true
-  # tls: true
-  # skip-cert-verify: true
-  # network: ws
-  # ws-path: /path
-  # ws-headers: #这一行后面不要写东西
-  #   Host: v2ray.com # 填你的主机名
-  
-
-- {name: "SuChen-圣何塞", server: 185.218.7.123, port: 443, type: vmess, uuid: ace9c8ee-d8c7-485e-a115-5775c1891bca, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true, network: ws, ws-opts: {path: /h8DPm3s509, headers: {Host: shs.suchenawa.com}}, udp: true}
+- {"type":"vmess","name":"CF+加拿大","ws-opts":{"path":"/v2wss","headers":{"host":"v2-ca1.silverdragon.cn"}},"server":"v2.hanwuss.loongapi.com","port":"443","uuid":"504b193f-b0b2-41dc-81fa-12849dbb0f19","alterId":"0","cipher":"auto","network":"ws","tls":true}
 - {"type":"vmess","name":"SuChen-ST","ws-opts":{"path":"/suchen","headers":{"host":"st.suchenawa.com"}},"server":"st.suchenawa.com","port":"443","uuid":"670c745c-8699-4741-95b1-2feffc0e6e0b","alterId":"0","cipher":"auto","network":"ws","tls":true}
-    # Trojan4
-- name: "SuChen-新加坡"
-  type: trojan
-  server: sg.lfmemz.ltd
-  port: 443
-  password: openwrt
-  # udp: true
-  # sni: example.com # aka server name
-  alpn:
-     - h2
-     - http/1.1
-  # skip-cert-verify: true
 
 # # Trojan5
 # - name: "Suchen-HK"
@@ -175,8 +100,7 @@ proxy-groups:
 - name: "自动选择快速节点"
   type: url-test
   proxies:
-    - "SuChen-圣何塞"
-    - "SuChen-新加坡"
+    - "CF+加拿大"
     - "SuChen-ST"
   url: 'http://www.gstatic.com/generate_204'
   interval: 300
@@ -208,8 +132,7 @@ proxy-groups:
   type: select
   proxies:
     - "自动选择快速节点"
-    - "SuChen-圣何塞"
-    - "SuChen-新加坡"
+    - "CF+加拿大"
     - "SuChen-ST"
 
 
@@ -232,12 +155,7 @@ proxy-groups:
   type: select
   proxies:
     - "PROXY"
-    - "ss"
-    - "ss-obfs"
-    - "ss-v2ray"
-    - "v2ray"
-    - "SuChen-圣何塞"
-    - "SuChen-新加坡"
+    - "CF+加拿大"
     - "SuChen-ST"
 
 
@@ -246,12 +164,7 @@ proxy-groups:
   type: select
   proxies:
     - "DIRECT"
-    - "ss"
-    - "ss-obfs"
-    - "ss-v2ray"
-    - "v2ray"
-    - "SuChen-圣何塞"
-    - "SuChen-新加坡"
+    - "CF+加拿大"
     - "SuChen-ST"
 
 
