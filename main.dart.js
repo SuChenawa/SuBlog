@@ -14004,7 +14004,7 @@ a01:function a01(a){this.a=a},
 MP(a){var s=0,r=A.a2(t.H)
 var $async$MP=A.a3(function(b,c){if(b===1)return A.a_(c,r)
 while(true)switch(s){case 0:s=2
-return A.a4(B.aX.em("Clipboard.setData",A.aK(["text","https://www.suchenawa.com/sc-st.yaml"],t.N,t.z),t.H),$async$MP)
+return A.a4(B.aX.em("Clipboard.setData",A.aK(["text","https://blog.suchenawa.com/sc-st.yaml"],t.N,t.z),t.H),$async$MP)
 case 2:return A.a0(null,r)}})
 return A.a1($async$MP,r)},
 MH:function MH(){},
