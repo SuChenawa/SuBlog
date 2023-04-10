@@ -1,0 +1,222 @@
+# HTTP 端口
+port: 7890
+
+# SOCKS5 端口
+socks-port: 7891
+
+# Linux 及 macOS 的 redir 端口
+# redir-port: 7892
+
+allow-lan: false
+
+# 仅适用于设置 allow-lan 为 true 时
+# "*": 绑定所有 IP 地址
+# 192.168.122.11: 绑定单个 IPv4 地址
+# "[aaaa::a8aa:ff:fe09:57d8]": 绑定单个 IPv6 地址
+# bind-address: "*"
+
+# Rule / Global / Direct (默认为 Rule 模式)
+mode: Rule
+
+# 设置输出日志的等级 (默认为 info)
+# info / warning / error / debug / silent
+log-level: info
+
+# RESTful API for clash
+external-controller: 127.0.0.1:9090
+ 
+# you can put the static web resource (such as clash-dashboard) to a directory, and clash would serve in `${API}/ui`
+# input is a relative path to the configuration directory or an absolute path
+# external-ui: folder
+
+# Secret for RESTful API (Optional)
+# secret: ""
+
+# 实验性功能
+experimental:
+  ignore-resolve-fail: true # 忽略 DNS 解析失败，默认值为true
+  # interface-name: en0 # 出站接口名称
+
+# 本地 SOCKS5/HTTP(S) 服务器认证
+# authentication:
+#  - "user1:pass1"
+#  - "user2:pass2"
+
+# # 实验性 hosts, 支持通配符（如 *.clash.dev 甚至 *.foo.*.examplex.com ）
+# # 静态域的优先级高于通配符域（foo.example.com > *.example.com）
+hosts:
+  'mtalk.google.com': 108.177.125.188
+#   '*.clash.dev': 127.0.0.1
+#   'alpha.clash.dev': '::1'
+
+# dns:
+  # enable: true # set true to enable dns (default is false)
+  # ipv6: false # default is false
+  # listen: 0.0.0.0:53
+  # # default-nameserver: # resolve dns nameserver host, should fill pure IP
+  # #   - 114.114.114.114
+  # #   - 8.8.8.8
+  # enhanced-mode: redir-host # or fake-ip
+  # # fake-ip-range: 198.18.0.1/16 # if you don't know what it is, don't change it
+  # fake-ip-filter: # fake ip white domain list
+  #   - '*.lan'
+  #   - localhost.ptlogin2.qq.com
+  # nameserver:
+  #   - 114.114.114.114
+  #   - tls://dns.rubyfish.cn:853 # dns over tls
+  #   - https://1.1.1.1/dns-query # dns over https
+  # fallback: # concurrent request with nameserver, fallback used when GEOIP country isn't CN
+  #   - tcp://1.1.1.1
+  # fallback-filter:
+  #   geoip: true # default
+  #   ipcidr: # ips in these subnets will be considered polluted
+  #     - 240.0.0.0/4
+
+proxies:
+
+- {name: 🇨🇦 HuoYiCDN+加拿大, server: 7gqhdav3-u.hw.huoyinetwork.cn, port: 80, client-fingerprint: chrome, type: vmess, uuid: 504b193f-b0b2-41dc-81fa-12849dbb0f19, alterId: 0, cipher: auto, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /v2wss, headers: {Host: www.baidu.com}}}
+- {"type":"vmess","name":"CF+加拿大","ws-opts":{"path":"/v2wss","headers":{"host":"v2-ca1.silverdragon.cn"}},"server":"v2-ca1.silverdragon.cn","port":"443","uuid":"504b193f-b0b2-41dc-81fa-12849dbb0f19","alterId":"0","cipher":"auto","network":"ws","tls":true}
+- {"type":"vmess","name":"SuChen-ST","ws-opts":{"path":"/suchen","headers":{"host":"st.suchenawa.com"}},"server":"st.suchenawa.com","port":"443","uuid":"670c745c-8699-4741-95b1-2feffc0e6e0b","alterId":"0","cipher":"auto","network":"ws","tls":true}
+- {"type":"vmess","name":"CF+香港","ws-opts":{"path":"/v2wss","headers":{"host":"v2-hkg.silverdragon.cn"}},"server":"v2-hkg.silverdragon.cn","port":"443","uuid":"e790e3bf-c553-40ed-b2b6-436afd3f5f5c","alterId":"0","cipher":"auto","network":"ws","tls":true}
+# # Trojan5
+# - name: "Suchen-HK"
+#   type: trojan
+#   server: hk.suchenawa.com
+#   port: 443
+#   password: qwertsuchen1
+#   # udp: true
+#   sni: hk.suchenawa.com
+#   alpn:
+#      - h2
+#      - http/1.1
+#   # skip-cert-verify: true
+
+
+# 代理组策略
+# 策略组示例请查阅 Clash 项目 README 以使用最新格式：https://github.com/Dreamacro/clash/blob/master/README.md
+proxy-groups:
+
+# url-test 通过指定的 URL 测试并选择延迟最低的节点
+- name: "自动选择快速节点"
+  type: url-test
+  proxies:
+    - "🇨🇦 HuoYiCDN+加拿大"
+    - "CF+加拿大"
+    - "SuChen-ST"
+    - "CF+香港"
+  url: 'http://www.gstatic.com/generate_204'
+  interval: 300
+
+# fallback 通过指定的 URL 测试并选择可用的节点，当 1 故障不可用时自动切换到 2 以此类推
+# - name: "Fallback"
+#   type: fallback
+#   proxies:
+#     - "1"
+#     - "2"
+#     - "3"
+#     - "4"
+#   url: 'http://www.gstatic.com/generate_204'
+#   interval: 300
+
+# load-balance: 负载均衡
+# - name: "LoadBalance"
+#   type: load-balance
+#   proxies:
+#     - "1"
+#     - "2"
+#     - "3"
+#     - "4"
+#   url: 'http://www.gstatic.com/generate_204'
+#   interval: 300
+
+# 代理节点选择
+- name: "PROXY"
+  type: select
+  proxies:
+    - "自动选择快速节点"
+    - "🇨🇦 HuoYiCDN+加拿大"
+    - "CF+加拿大"
+    - "SuChen-ST"
+    - "CF+香港"
+
+
+# 白名单模式 PROXY，黑名单模式 DIRECT
+- name: "Final"
+  type: select
+  proxies:
+    - "DIRECT"
+    - "PROXY"
+
+# Apple 服务代理
+- name: "Apple"
+  type: select
+  proxies:
+    - "DIRECT"
+    - "PROXY"
+
+# 国际流媒体服务
+- name: "GlobalMedia"
+  type: select
+  proxies:
+    - "PROXY"
+    - "🇨🇦 HuoYiCDN+加拿大"
+    - "CF+加拿大"
+    - "SuChen-ST"
+    - "CF+香港"
+
+
+# 大陆流媒体面向港澳台限定服务
+- name: "HKMTMedia"
+  type: select
+  proxies:
+    - "DIRECT"
+    - "🇨🇦 HuoYiCDN+加拿大"
+    - "CF+加拿大"
+    - "SuChen-ST"
+    - "CF+香港"
+rules:
+
+  
+  - DOMAIN-SUFFIX,warframe.com,DIRECT
+  - DOMAIN,www.warframe.com,DIRECT
+  - DOMAIN,contact.warframe.com,DIRECT
+  - DOMAIN,content.warframe.com,DIRECT
+  - DOMAIN,api.warframe.com,DIRECT
+  - DOMAIN,origin.warframe.com,DIRECT
+  - DOMAIN,rutracker.org,DIRECT
+  - DOMAIN,*.rutracker.org,DIRECT
+  # - DOMAIN,*.exhentai.org,DIRECT
+  # - DOMAIN,exhentai.org,DIRECT
+
+  
+
+
+# Clash for Windows
+cfw-bypass:
+  - qq.com
+  - music.163.com
+  - '*.music.126.net'
+  - localhost
+  - 127.*
+  - 10.*
+  - 172.16.*
+  - 172.17.*
+  - 172.18.*
+  - 172.19.*
+  - 172.20.*
+  - 172.21.*
+  - 172.22.*
+  - 172.23.*
+  - 172.24.*
+  - 172.25.*
+  - 172.26.*
+  - 172.27.*
+  - 172.28.*
+  - 172.29.*
+  - 172.30.*
+  - 172.31.*
+  - 192.168.*
+  - <local>
+cfw-latency-timeout: 5000
+
+
