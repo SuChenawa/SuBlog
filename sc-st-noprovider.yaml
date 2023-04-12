@@ -74,7 +74,7 @@ hosts:
 
 proxies:
 
-- {name: 🇨🇦 HuoYiCDN+加拿大, server: 7gqhdav3-u.hw.huoyinetwork.cn, port: 80, client-fingerprint: chrome, type: vmess, uuid: 504b193f-b0b2-41dc-81fa-12849dbb0f19, alterId: 0, cipher: auto, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /v2wss, headers: {Host: www.baidu.com}}}
+- {name: 🇨🇦 HuoYiCDN+加拿大, server: 209.141.38.205, port: 80, client-fingerprint: chrome, type: vmess, uuid: 504b193f-b0b2-41dc-81fa-12849dbb0f19, alterId: 0, cipher: auto, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /v2wss, headers: {Host: www.baidu.com}}}
 - {"type":"vmess","name":"CF+加拿大","ws-opts":{"path":"/v2wss","headers":{"host":"v2-ca1.silverdragon.cn"}},"server":"v2-ca1.silverdragon.cn","port":"443","uuid":"504b193f-b0b2-41dc-81fa-12849dbb0f19","alterId":"0","cipher":"auto","network":"ws","tls":true}
 - {"type":"vmess","name":"SuChen-ST","ws-opts":{"path":"/suchen","headers":{"host":"st.suchenawa.com"}},"server":"st.suchenawa.com","port":"443","uuid":"670c745c-8699-4741-95b1-2feffc0e6e0b","alterId":"0","cipher":"auto","network":"ws","tls":true}
 - {"type":"vmess","name":"CF+香港","ws-opts":{"path":"/v2wss","headers":{"host":"v2-hkg.silverdragon.cn"}},"server":"v2-hkg.silverdragon.cn","port":"443","uuid":"e790e3bf-c553-40ed-b2b6-436afd3f5f5c","alterId":"0","cipher":"auto","network":"ws","tls":true}
