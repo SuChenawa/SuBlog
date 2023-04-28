@@ -279,10 +279,10 @@ rule-providers:
   ipattributionbypass:
     type: http
     behavior: ipcidr
-    url: "https://github.com/lwd-temp/anti-ip-attribution/blob/main/generated/rule-provider.yaml"
+    url: "https://github.com/lwd-temp/anti-ip-attribution/blob/main/generated/rule-provider-proxy.yaml"
     path: ./ruleset/ipattributionbypass.yaml
     interval: 86400
-
+    
 rules:
   - RULE-SET,applications,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
@@ -297,6 +297,7 @@ rules:
   - RULE-SET,lancidr,DIRECT
   - RULE-SET,cncidr,DIRECT
   - RULE-SET,telegramcidr,PROXY
+  - RULE-SET,ipattributionbypass,DIRECT
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,DIRECT
   - MATCH,PROXY
