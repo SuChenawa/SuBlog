@@ -213,13 +213,6 @@ rule-providers:
     path: ./ruleset/proxy.yaml
     interval: 86400
 
-  direct:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
-    path: ./ruleset/direct.yaml
-    interval: 86400
-
   private:
     type: http
     behavior: domain
@@ -255,13 +248,6 @@ rule-providers:
     path: ./ruleset/telegramcidr.yaml
     interval: 86400
 
-  cncidr:
-    type: http
-    behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
-    path: ./ruleset/cncidr.yaml
-    interval: 86400
-
   lancidr:
     type: http
     behavior: ipcidr
@@ -282,7 +268,6 @@ rule-providers:
     url: "https://github.com/lwd-temp/anti-ip-attribution/blob/main/generated/rule-provider-proxy.yaml"
     path: ./ruleset/ipattributionbypass.yaml
     interval: 86400
-    
 rules:
   - RULE-SET,applications,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
@@ -293,16 +278,25 @@ rules:
   - RULE-SET,apple,DIRECT
   - RULE-SET,google,DIRECT
   - RULE-SET,proxy,PROXY
-  - RULE-SET,direct,DIRECT
   - RULE-SET,lancidr,DIRECT
-  - RULE-SET,cncidr,DIRECT
   - RULE-SET,telegramcidr,PROXY
   - RULE-SET,ipattributionbypass,PROXY
   - GEOIP,LAN,DIRECT
-  - GEOIP,CN,DIRECT
   - MATCH,PROXY
-  
-  
+
+  - DOMAIN-SUFFIX,biliapi.net,PROXY
+  - DOMAIN,api.bilibili.com,PROXY
+  - DOMAIN,api.bilibili.tv,PROXY
+  - DOMAIN,app.bilibili.com,PROXY
+  - DOMAIN-SUFFIX,biliapi.com,PROXY
+  - DOMAIN,api.live.bilibili.com,PROXY
+  - DOMAIN,api.vc.bilibili.com,PROXY
+  - DOMAIN,passport.bilibili.com,PROXY
+  - DOMAIN,live-trace.bilibili.com,PROXY
+  - DOMAIN,message.bilibili.com,PROXY
+  - DOMAIN,cm.bilibili.com,PROXY
+  - DOMAIN-SUFFIX,bilibili.com,PROXY
+
   - DOMAIN-SUFFIX,warframe.com,DIRECT
   - DOMAIN,www.warframe.com,DIRECT
   - DOMAIN,contact.warframe.com,DIRECT
@@ -314,14 +308,11 @@ rules:
   # - DOMAIN,*.exhentai.org,DIRECT
   # - DOMAIN,exhentai.org,DIRECT
 
-  
-
-
 # Clash for Windows
 cfw-bypass:
   - qq.com
   - music.163.com
-  - '*.music.126.net'
+  - "*.music.126.net"
   - localhost
   - 127.*
   - 10.*
@@ -344,5 +335,3 @@ cfw-bypass:
   - 192.168.*
   - <local>
 cfw-latency-timeout: 5000
-
-
