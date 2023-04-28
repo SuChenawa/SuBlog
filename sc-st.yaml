@@ -275,7 +275,14 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
     path: ./ruleset/applications.yaml
     interval: 86400
-    
+
+  ipattributionbypass:
+    type: http
+    behavior: ipcidr
+    url: "https://github.com/lwd-temp/anti-ip-attribution/blob/main/generated/rule-provider.yaml"
+    path: ./ruleset/ipattributionbypass.yaml
+    interval: 86400
+
 rules:
   - RULE-SET,applications,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
